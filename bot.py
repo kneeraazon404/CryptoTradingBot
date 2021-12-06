@@ -15,7 +15,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "", ["live"])
     except getopt.GetoptError:
-        print('trading-bot.py')
+        print("trading-bot.py")
         sys.exit(2)
 
     for opt, arg in opts:
@@ -24,7 +24,7 @@ def main(argv):
             live = True
 
     # START_DATE specified: we are in backtest mode
-    if shared.strategy['start_date']:
+    if shared.strategy["start_date"]:
 
         chart = BotChart()
 
@@ -55,17 +55,25 @@ def main(argv):
                 strategy.tick(candlestick)
 
             except ccxt.NetworkError as e:
-                print(type(e).__name__, e.args, 'Exchange error (ignoring)')
+                print(type(e).__name__, e.args, "Exchange error (ignoring)")
             except ccxt.ExchangeError as e:
-                print(type(e).__name__, e.args, 'Exchange error (ignoring)')
+                print(type(e).__name__, e.args, "Exchange error (ignoring)")
             except ccxt.DDoSProtection as e:
-                print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
+                print(type(e).__name__, e.args, "DDoS Protection (ignoring)")
             except ccxt.RequestTimeout as e:
-                print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
+                print(type(e).__name__, e.args, "Request Timeout (ignoring)")
             except ccxt.ExchangeNotAvailable as e:
-                print(type(e).__name__, e.args, 'Exchange Not Available due to downtime or maintenance (ignoring)')
+                print(
+                    type(e).__name__,
+                    e.args,
+                    "Exchange Not Available due to downtime or maintenance (ignoring)",
+                )
             except ccxt.AuthenticationError as e:
-                print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
+                print(
+                    type(e).__name__,
+                    e.args,
+                    "Authentication Error (missing API keys, ignoring)",
+                )
 
             drawingCandles = copy.copy(strategy.candlesticks)
             if not candlestick.isClosed():
@@ -77,7 +85,7 @@ def main(argv):
                 candlestick = BotCandlestick()
 
             x += 1
-            time.sleep(shared.exchange['interval'])
+            time.sleep(shared.exchange["interval"])
 
 
 if __name__ == "__main__":
