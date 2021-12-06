@@ -1,6 +1,5 @@
 import sys, getopt
 import time
-import pprint
 import copy
 import shared
 from botchart import BotChart
